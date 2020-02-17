@@ -14,7 +14,7 @@ class ListeeView extends StatefulWidget {
 
 class _ListeeState extends State<ListeeView>{
 
-  Future<ShoppingList> items;
+  Future<List<ShoppingItem>> items;
 
   @override
   void initState() {
@@ -42,25 +42,41 @@ class _ListeeState extends State<ListeeView>{
               itemCount: snapshot.data.length,
             );
           } else {
-            return Center(
+            return Container(
+              padding: EdgeInsets.all(32),
               child: Text(
                 'Momentan soll nichts gekauft werden 🙄',
-                style: GoogleFonts.openSans(fontWeight: FontWeight.bold),
-                textScaleFactor: 1,
+                style: Theme.of(context).textTheme.title,
+                textScaleFactor: 2,
               ),
             );
           }
         } else if (snapshot.hasError) {
-          return Column(children: <Widget>[
-            
-            Center(
-              child: Text(
-                'Wir arbeiten so schnell wie möglich an einer Lösung 👨‍💻',
-                style: GoogleFonts.openSans(fontWeight: FontWeight.bold),
-                textScaleFactor: 0.8,
-              ),
+          return Container(
+            padding: EdgeInsets.all(32),
+            child: Column(
+              children: <Widget>[
+                Center(
+                  child: Text(
+                    'Something went wrong... 😤',
+                    style: Theme.of(context).textTheme.title,
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+                Center(
+                  heightFactor: 2,
+                  child: Text(
+                    'We are working on a solution as fast as possible 👨‍💻',
+                    style: Theme.of(context).textTheme.subtitle,
+                    softWrap: true,
+                    textAlign: TextAlign.center,
+                  ),
+                )
+              ],
+              mainAxisAlignment: MainAxisAlignment.center,
             )
-          ]);
+          );
         }
 
         // Fallthrough

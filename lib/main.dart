@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:listee_flutter/AddElementForm.dart';
 import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -31,10 +32,14 @@ class MyApp extends StatelessWidget {
         // or simply save your changes to "hot reload" in a Flutter IDE).
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
-        primarySwatch: Colors.deepPurple,
-        textTheme: GoogleFonts.openSansTextTheme(
-          Theme.of(context).textTheme,
+        primaryColor: Colors.blue[900],
+        accentColor: Colors.white,
+        textTheme: TextTheme(
+          title: GoogleFonts.roboto(fontSize: 42, fontWeight: FontWeight.w900),
+          subtitle: GoogleFonts.roboto(fontSize: 32, fontWeight: FontWeight.w200),
         ),
+        brightness: Brightness.light,
+        backgroundColor: Colors.blue,
       ),
       home: ListeeWrapper(title: 'Listee 🍕🍷'),
     );
@@ -67,10 +72,19 @@ class _ListeeWrapperState extends State<ListeeWrapper> {
         title: Text(widget.title),
         centerTitle: true,
       ),
-      body: ListeeView(),
+      body: Container(
+        child: ListeeView(),
+        color: Theme.of(context).backgroundColor,
+      ),
       floatingActionButton: FloatingActionButton(
         tooltip: 'Neue Zutat hinzufügen',
         child: Icon(Icons.add),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => AddElementForm()),
+          );
+        },
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

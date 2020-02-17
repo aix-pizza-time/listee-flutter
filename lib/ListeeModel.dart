@@ -47,11 +47,15 @@ class ListeeModel extends ChangeNotifier {
   }
 
   static Future<List<ShoppingItem>> fetch() async {
-    final response = await http.get('https://pizza.bartolomey.me/api/v2/list');
-    if (response.statusCode == 200) {
-      return _parseFetchResult(response.body);
-    } else {
-      return Future.error(response.body);
+    try {
+      final response = await http.get('https://pizza.bartolomey.me/api/v2/list');
+      if (response.statusCode == 200) {
+        return _parseFetchResult(response.body);
+      } else {
+        return Future.error(response.body);
+      }
+    } catch(e) {
+      return Future.error(''); 
     }
   }
 
